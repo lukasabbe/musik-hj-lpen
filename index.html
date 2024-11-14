@@ -1,0 +1,17 @@
+<html lang="sv">
+    <head>
+        <title>SGC:s bössa</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1 id="money"></h1>
+        <script>
+            setInterval(async () =>{
+                const response = await fetch('http://localhost:3000/')
+                const data = await response.json()
+                document.getElementById('money').innerText = "SGC:s bössa har fått: " + data.amount + " kr";
+            }, 1000 * 10)
+        </script>
+    </body>
+</html>
