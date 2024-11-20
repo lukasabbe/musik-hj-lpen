@@ -1,4 +1,4 @@
-<html lang="sv">
+<html>
     <head>
         <title>SGC:s bössa</title>
         <meta charset="UTF-8">
@@ -8,8 +8,8 @@
         <h1 id="money"></h1>
         <script>
             setInterval(async () =>{
-                const COLLECTION_TO_REQUEST = "";
-                const response = await fetch('https://musik.lukasabbe.com/' + COLLECTION_TO_REQUEST)
+                const COLLECTION_TO_REQUEST = "500-kronorsboessan";
+                const response = await fetch(`http://localhost:3001/money/` + COLLECTION_TO_REQUEST)
                 const data = await response.json()
                 document.getElementById('money').innerText = "SGC:s bössa har fått: " + data.amount + " kr";
             }, 1000 * 10)
