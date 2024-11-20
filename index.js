@@ -7,12 +7,12 @@ app.use(express.json());
 
 app.get('/:bossa', async (req, res) => {
 
-    if(req.params.bossa === null) return res.status(400).json({error: "No bossa id provided"});
+    if(req.params.bossa === null || req.params.bossa == "favicon.ico") return res.status(400).json({error: "No bossa id provided"});
 
-    let data =  await fetch(`https://bossan.musikhjalpen.se/page-data/${req.params.bossa}/page-data.json`);
-    let json = await data.json();
+    let data = await fetch(`https://bossan.musikhjalpen.se/page-data/${req.params.bossa}/page-data.json`);
+    let json = await data.json().catch();
     data = await fetch(`https://musikhjalpen-franceska.herokuapp.com/server/fundraisers/${json.result.data.contentfulFundraiser.contentful_id}?fields%5B%5D=amount&fields=prev_amount`)
-    json = await data.json();
+    json = await data.json()
     res.set("Access-Control-Allow-Origin","*").json(json);
 })
 
