@@ -10,7 +10,7 @@ function runConfet() {
     , timer = undefined
     , frame = undefined
     , confetti = []
-    , totalAnimationTime = 100;
+    , totalAnimationTime = 1000;
 
   var particles = 10
     , spread = 40
