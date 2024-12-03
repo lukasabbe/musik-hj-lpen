@@ -28,7 +28,10 @@
                 0
             ]
             drawBar();
-            setInterval(async () =>{
+            runScript();
+            setInterval(runScript, 1000 * 10)
+
+            async function runScript(){
                 const COLLECTION_TO_REQUEST = GetURLParameter('bossa');
                 const response = await fetch(`https://musik.lukasabbe.com/money/` + COLLECTION_TO_REQUEST)
                 const data = await response.json();
@@ -36,8 +39,7 @@
                     runConfet();
                 lastAmount = data.amount;
                 drawBar();
-            }, 1000 * 10)
-
+            }
             function drawBar(){
                 const canvas = document.getElementById('canvas');
                 const ctx = canvas.getContext('2d');
@@ -61,11 +63,14 @@
                 }
                 roundedRect(ctx, canvas.width/8 +7.5, 7.5, (((window.innerWidth/4)*3)-15) * ((displayAmount-goals[currentGoalIndex-1])/(currentGoal-goals[currentGoalIndex-1])), 50-15, 14, true);
 
-                ctx.font = "48px Sansumu02-Regular";
+                ctx.font = "49px Sansumu02-Regular";
                 ctx.fillStyle = 'black';
-                ctx.fillText("SGC:s bössa har fått: "+lastAmount + ' kr', canvas.width/8 + 10, 100);
+                ctx.strokeStyle = 'white';
+                ctx.fillText("SGC:s bössa har fått: "+lastAmount + ' kr', canvas.width/8 + 15, 100);
+                ctx.strokeText("SGC:s bössa har fått: "+lastAmount + ' kr', canvas.width/8 + 15, 100);
 
                 ctx.fillText("Nästa mål: "+currentGoal + ' kr', canvas.width/2 + 300, 100);
+                ctx.strokeText("Nästa mål: "+currentGoal + ' kr', canvas.width/2 + 300, 100);
 
                 ctx.fillStyle = '#5cea15';
                 ctx.beginPath();
